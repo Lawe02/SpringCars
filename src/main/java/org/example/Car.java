@@ -1,9 +1,5 @@
 package org.example;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
 import java.util.UUID;
 
 public class Car {
@@ -21,5 +17,17 @@ public class Car {
     @Override
     public String toString(){
         return "Make: "+this.make+" Model: "+this.model+" Year: "+this.year;
+    }
+
+    public String getMake() {
+        return this.make;
+    }
+
+    public String getModel() {
+        return this.model;
+    }
+
+    public int getYear() {
+        return this.year;
     }
 }

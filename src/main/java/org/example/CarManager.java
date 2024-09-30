@@ -1,11 +1,9 @@
 package org.example;
 
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-
 
 public class CarManager {
 
@@ -15,8 +13,18 @@ public class CarManager {
         cars.add(car);
     }
 
-    public List<Car> getCars() {
-        return cars;
+    public List<Car> getCarsByModelName(String model) {
+        return cars.stream().filter(car -> car.getModel().contains(model)).toList();
+    }
+
+    public List<Car> getCarsSortedByYear() {
+        return cars.stream()
+                .sorted(Comparator.comparingInt(Car::getYear))
+                .toList();
+    }
+
+    public List<Car> getCarsByMakeName(String make) {
+        return cars.stream().filter(car -> car.getMake().contains(make)).toList();
     }
 
     public void createCarFromUserInput() {
@@ -43,7 +51,8 @@ public class CarManager {
         System.out.println("Car created and added to the list!");
     }
 
-    public void displayCars() {
+
+    public void displayCars(List<Car> cars) {
         if (cars.isEmpty()) {
             System.out.println("No cars available.");
         } else {
@@ -62,7 +71,10 @@ public class CarManager {
             System.out.println("\nPlease choose an option:");
             System.out.println("1. Add a new car");
             System.out.println("2. View all cars");
-            System.out.println("3. Exit");
+            System.out.println("3. Get cars by model");
+            System.out.println("4. Get cars by make");
+            System.out.println("5. Sort cars by year");
+            System.out.println("6. Exit");
 
             System.out.print("Your choice: ");
             String choice = scanner.nextLine();
@@ -72,9 +84,26 @@ public class CarManager {
                     createCarFromUserInput();
                     break;
                 case "2":
-                    displayCars();
+                    displayCars(cars);
                     break;
                 case "3":
+                    System.out.print("Enter the model of the car you want to search for: ");
+                    String model = scanner.nextLine();
+                    List<Car> carsByModel = getCarsByModelName(model);
+                    displayCars(carsByModel);
+                    break;
+                case "4":
+                    System.out.print("Enter the make of the car you want to search for: ");
+                    String make = scanner.nextLine();
+                    List<Car> carsByMake = getCarsByMakeName(make);
+                    displayCars(carsByMake);
+                    break;
+                case "5":
+                    System.out.print("Cars sorted by year: ");
+                    List<Car> carsbyYear = getCarsSortedByYear();
+                    displayCars(carsbyYear);
+                    break;
+                case "6":
                     System.out.println("Exiting program...");
                     running = false;
                     break;
