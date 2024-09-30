@@ -1,8 +1,11 @@
 package org.example;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 
 public class CarManager {
 
@@ -46,7 +49,7 @@ public class CarManager {
         } else {
             System.out.println("Cars in the system:");
             for (Car car : cars) {
-                System.out.println(car);
+                System.out.println(car.toString());
             }
         }
     }

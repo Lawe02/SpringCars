@@ -1,5 +1,9 @@
 package org.example;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 import java.util.UUID;
 
 public class Car {
@@ -10,8 +14,12 @@ public class Car {
 
     public Car(String Make, String Model, int Year) {
         carId = UUID.randomUUID();
-        this.make = make;
-        this.model = model;
-        this.year = year;
+        this.make = Make;
+        this.model = Model;
+        this.year = Year;
+    }
+    @Override
+    public String toString(){
+        return "Make: "+this.make+" Model: "+this.model+" Year: "+this.year;
     }
 }

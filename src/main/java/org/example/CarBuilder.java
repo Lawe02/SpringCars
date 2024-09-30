@@ -1,5 +1,7 @@
 package org.example;
 
+import org.springframework.stereotype.Component;
+
 public class CarBuilder {
 
     private int year;
@@ -26,8 +28,7 @@ public class CarBuilder {
     }
 
     public Car build() {
-        Car car = new Car(make,model,year);
-        return car;
+        return new Car(make,model,year);
     }
 
 }
